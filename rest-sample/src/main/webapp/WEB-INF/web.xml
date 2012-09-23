@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xmlns="http://java.sun.com/xml/ns/javaee"
+		 xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+		 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+		 id="WebApp_ID"
+		 version="2.5">
+
+	<display-name>REST Sample</display-name>
+
+	<!--
+		Main configuration file for this Spring web application.
+	-->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			/WEB-INF/config/rest-services-config.xml
+		</param-value>
+	</context-param>
+
+	<!--
+		Loads the Spring web application context using the config file defined above.
+	-->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<!--
+		Define the Spring Dispatcher Servlet for the REST services.
+		The 'contextConfiguration' param with an empty value means that the
+		Spring Context won't try to load a default file called restservices-servlet.xml
+	 -->
+	<servlet>
+		<servlet-name>restservices</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value></param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<!--
+		This Servlet mapping means that this Servlet will handle all incoming requests
+	 -->
+	<servlet-mapping>
+		<servlet-name>restservices</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+</web-app>
